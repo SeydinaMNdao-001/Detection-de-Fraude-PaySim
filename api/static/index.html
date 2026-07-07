@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Détection de Fraude — Console</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-dot"></div>
+      <h1>Moteur de détection de fraude</h1>
+    </div>
+    <div class="status-tag">MODÈLE ACTIF · RANDOM FOREST</div>
+  </div>
+
+  <div class="grid">
+
+    <!-- FORM PANEL -->
+    <div class="panel">
+      <div class="panel-label">Transaction à analyser</div>
+
+      <div class="field">
+        <label>Montant (XOF / unité locale)</label>
+        <input type="number" id="amount" value="181.00" step="0.01">
+      </div>
+
+      <div class="row-2">
+        <div class="field">
+          <label>Jour (1–31)</label>
+          <input type="number" id="day" value="1" min="1" max="31">
+        </div>
+        <div class="field">
+          <label>Heure (0–23)</label>
+          <input type="number" id="hour" value="1" min="0" max="23">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Type de transaction</label>
+        <div class="type-toggle" id="typeToggle">
+          <button data-type="CASH_IN">CASH_IN</button>
+          <button data-type="CASH_OUT">CASH_OUT</button>
+          <button data-type="DEBIT">DEBIT</button>
+          <button data-type="PAYMENT">PAYMENT</button>
+          <button data-type="TRANSFER" class="active">TRANSFER</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Destinataire</label>
+        <div class="toggle-row" id="merchantToggle">
+          <button data-val="0" class="active">Client particulier</button>
+          <button data-val="1">Marchand</button>
+        </div>
+      </div>
+
+      <button class="submit-btn" id="submitBtn" onclick="predire()">Analyser la transaction</button>
+    </div>
+
+    <!-- RESULT PANEL -->
+    <div class="panel result-panel" id="resultPanel">
+      <div class="placeholder" id="placeholder">
+        <span class="icon">◎</span>
+        En attente d'une transaction à analyser
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-note">seuil de décision : <span>0.530</span> — calibré sur maximisation du F1-score</div>
+
+</div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>

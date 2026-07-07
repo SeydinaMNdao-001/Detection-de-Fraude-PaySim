@@ -1,0 +1,101 @@
+À PROPOS DU JEU DE DONNÉES
+
+CONTEXTE
+
+Il existe un manque important de jeux de données publics concernant les services financiers, et en particulier dans le domaine émergent des transactions de mobile money. Les jeux de données financiers sont essentiels pour de nombreux chercheurs, notamment dans le domaine de la détection de fraude. L’un des principaux problèmes est le caractère intrinsèquement privé des transactions financières, ce qui entraîne l’absence de jeux de données accessibles au public.
+
+Nous présentons un jeu de données synthétique généré à l’aide d’un simulateur appelé PaySim afin de répondre à ce problème. PaySim utilise des données agrégées issues d’un jeu de données privé pour générer un jeu de données synthétique qui reproduit le fonctionnement normal des transactions et y injecte des comportements frauduleux afin d’évaluer les performances des méthodes de détection de fraude.
+
+CONTENU
+
+PaySim simule des transactions de mobile money à partir d’un échantillon de transactions réelles extraites d’un mois de journaux financiers provenant d’un service de mobile money mis en place dans un pays africain. Les journaux originaux ont été fournis par une entreprise multinationale, fournisseur du service financier mobile, actuellement utilisé dans plus de 14 pays dans le monde.
+
+Ce jeu de données synthétique est réduit à un quart de la taille du jeu de données original et a été créé spécifiquement pour Kaggle.
+
+REMARQUE IMPORTANTE :
+Les transactions détectées comme frauduleuses sont annulées. Par conséquent, pour la détection de fraude, les colonnes suivantes ne doivent pas être utilisées :
+- oldbalanceOrg
+- newbalanceOrig
+- oldbalanceDest
+- newbalanceDest
+
+DESCRIPTION DES COLONNES
+
+step :
+Représente une unité de temps dans le monde réel. Ici, 1 step = 1 heure. Total : 744 steps (simulation de 30 jours).
+
+type :
+Types de transaction :
+- CASH-IN : dépôt d’argent
+- CASH-OUT : retrait d’argent
+- DEBIT : débit
+- PAYMENT : paiement
+- TRANSFER : transfert
+
+amount :
+Montant de la transaction en monnaie locale.
+
+nameOrig :
+Client qui initie la transaction.
+
+oldbalanceOrg :
+Solde initial avant la transaction.
+
+newbalanceOrig :
+Solde après la transaction.
+
+nameDest :
+Client destinataire de la transaction.
+
+oldbalanceDest :
+Solde initial du destinataire avant la transaction.
+Note : aucune information n’est disponible pour les clients dont l’identifiant commence par M (commerçants).
+
+newbalanceDest :
+Solde du destinataire après la transaction.
+Même remarque pour les commerçants (identifiant commençant par M).
+
+isFraud :
+Indique si la transaction est frauduleuse.
+Dans ce jeu de données, les fraudeurs tentent de prendre le contrôle des comptes des clients, de transférer les fonds vers un autre compte, puis de retirer l’argent pour vider le compte.
+
+- 1 = fraude
+- 0 = transaction normale
+
+isFlaggedFraud :
+Indique si une transaction est signalée par le système.
+Le système détecte les tentatives de transfert massif.
+
+Dans ce jeu de données, une transaction est signalée si le montant transféré dépasse 200 000 en une seule opération.
+
+- 1 = transaction signalée
+- 0 = non signalée
+
+TRAVAUX DE RECHERCHE ANTÉRIEURS
+
+Il existe 5 fichiers similaires correspondant à 5 scénarios de simulation différents.
+
+Ces fichiers sont détaillés dans le chapitre 7 de la thèse de doctorat de l’auteur.
+
+Nous avons exécuté PaySim plusieurs fois avec des graines aléatoires sur 744 étapes (1 heure par étape), ce qui représente un mois complet de données simulées.
+
+Chaque exécution dure environ 45 minutes sur un processeur Intel i7 avec 16 Go de RAM.
+
+Chaque simulation produit environ 24 millions d’enregistrements financiers, répartis en 5 catégories :
+- CASH-IN
+- CASH-OUT
+- DEBIT
+- PAYMENT
+- TRANSFER
+
+REMERCIEMENTS
+
+Ce travail fait partie du projet de recherche :
+“Scalable resource-efficient systems for big data analytics”
+financé par la Knowledge Foundation (Suède), subvention 20140032.
+
+RÉFÉRENCE
+
+Lopez-Rojas, E. A., Elmir, A., Axelsson, S. (2016)
+“PaySim: A financial mobile money simulator for fraud detection”
+European Modeling and Simulation Symposium (EMSS), Larnaca, Chypre.
