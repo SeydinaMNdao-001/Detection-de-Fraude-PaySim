@@ -1,0 +1,13 @@
+# Environnement Python
+venv/
+__pycache__/
+*.pyc
+
+# Données volumineuses
+ML/mobile_money.csv
+
+# Modèles entraînés volumineux
+ML/*.pkl
+
+# Notebooks temporaires
+.ipynb_checkpoints/
